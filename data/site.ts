@@ -1,0 +1,40 @@
+export const siteConfig = {
+  name: "RAI PRAVEEN",
+  shortName: "RP",
+  role: "Graphic Designer / Video Editor / Motion Graphic Designer",
+  roles: [
+    "Graphic Designer",
+    "Video Editor",
+    "Motion Graphic Designer",
+    "Visual Effects Artist",
+  ],
+  tagline: "4+ years crafting social creatives, promotional videos, motion graphics and AI-powered visuals.",
+  bio: "Creative Graphic Designer, Video Editor and Motion Graphic Designer with 4+ years of hands-on experience creating social media creatives, promotional videos, motion graphics, thumbnails and digital content. Skilled in Adobe Creative Cloud, DaVinci Resolve, Figma, Canva and AI-powered creative tools.",
+  contact: {
+    phone: "+91 93460 31058",
+    phoneUrl: "tel:+919346031058",
+    email: "rai.praveen1058@gmail.com",
+    emailUrl: "mailto:rai.praveen1058@gmail.com",
+    location: "Hyderabad, Telangana, India",
+    availability: "Available for freelance & full-time roles",
+  },
+  stats: [
+    { value: 4, suffix: "+", label: "Years Experience" },
+    { value: 3, suffix: "", label: "Creative Studios" },
+    { value: 7, suffix: "+", label: "Featured Reels" },
+    { value: 100, suffix: "%", label: "Passion" },
+  ],
+  navLinks: [
+    { name: "Home", href: "#hero" },
+    { name: "About", href: "#about" },
+    { name: "Work", href: "#work" },
+    { name: "Experience", href: "#experience" },
+    { name: "Skills", href: "#skills" },
+    { name: "Contact", href: "#contact" },
+  ],
+  socials: [
+    { name: "YouTube", url: "https://youtube.com/@raipraveen", handle: "@raipraveen" },
+    { name: "Instagram", url: "https://instagram.com", handle: "@raipraveen.design" },
+    { name: "LinkedIn", url: "https://linkedin.com", handle: "Rai Praveen" },
+  ],
+};

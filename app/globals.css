@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-light: #FAF8F4;
+  --bg-ivory: #F3EFE8;
+  --bg-medium: #E4DCCD;
+  --bg-stone: #CFC6B6;
+  --surface: #FFFFFF;
+  --ink: #1C1B19;
+  --ink-soft: #5C574F;
+  --ink-muted: #8A8378;
+  --accent: #F5B800;
+  --accent-soft: #FCE9A6;
+  --line: rgba(28, 27, 25, 0.10);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-light);
+  color: var(--ink);
+  scroll-behavior: auto; /* Lenis handles smooth scrolling */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-light);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle Film-Grain Overlay */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Outlined Display Text Effect */
+.stroke-outline {
+  -webkit-text-stroke: 1.5px #1C1B19;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .stroke-outline {
+    -webkit-text-stroke: 2px #1C1B19;
+  }
+}
+
+/* Lenis Recommended CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Hide scrollbars for carousel tracks */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Selection Color */
+::selection {
+  background-color: var(--accent);
+  color: var(--ink);
+}
+
+/* ── Preloader running character keyframes ───────────────────────────── */
+@keyframes rleg-f  { 0%,100% { transform: rotate(-38deg); } 50% { transform: rotate(38deg);  } }
+@keyframes rleg-b  { 0%,100% { transform: rotate(38deg);  } 50% { transform: rotate(-38deg); } }
+@keyframes rarm-f  { 0%,100% { transform: rotate(32deg);  } 50% { transform: rotate(-32deg); } }
+@keyframes rarm-b  { 0%,100% { transform: rotate(-32deg); } 50% { transform: rotate(32deg);  } }
+@keyframes rbounce { 0%,100% { transform: translateY(0);  } 50% { transform: translateY(-3px); } }
+
+.r-body { animation: rbounce 0.3s ease-in-out infinite; }
+.r-lf   { transform-origin: 12px 22px; animation: rleg-f 0.3s ease-in-out infinite; }
+.r-lb   { transform-origin: 12px 22px; animation: rleg-b 0.3s ease-in-out infinite; }
+.r-af   { transform-origin: 12px 12px; animation: rarm-f 0.3s ease-in-out infinite; }
+.r-ab   { transform-origin: 12px 12px; animation: rarm-b 0.3s ease-in-out infinite; }
+
+/* ── Dual Automatic Video Stream Keyframes ───────────────────────────── */
+@keyframes videoScrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes videoScrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-video-left {
+  display: flex;
+  width: max-content;
+  animation: videoScrollLeft 48s linear infinite;
+}
+
+.animate-video-right {
+  display: flex;
+  width: max-content;
+  animation: videoScrollRight 48s linear infinite;
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused !important;
+}
+
