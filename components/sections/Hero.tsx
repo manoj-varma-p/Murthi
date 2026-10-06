@@ -198,7 +198,7 @@ export function Hero() {
           animate={isPreloaderFinished ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
           className="font-display font-black leading-none tracking-[-0.02em] text-[#EEFF04] uppercase text-center drop-shadow-sm [-webkit-text-stroke:1px_rgba(28,27,25,0.18)] inline-block"
-          style={{ fontSize: 'clamp(2.8rem, 12.2vw, 24rem)', whiteSpace: 'nowrap' }}
+          style={{ fontSize: 'clamp(2.8rem, min(12.2vw, 24vh), 22rem)', whiteSpace: 'nowrap' }}
         >
           PRAVEEN
         </motion.span>
