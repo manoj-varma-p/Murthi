@@ -191,23 +191,23 @@ export function Hero() {
       </motion.header>
 
       {/* 2. GIANT BACKGROUND TEXT — glides up and expands from loader center into hero position */}
-      <div className="absolute inset-x-0 top-[9%] sm:top-[4%] flex justify-center items-center pointer-events-none select-none z-0">
+      <div className="absolute inset-x-0 top-[9%] sm:top-[3.5%] md:top-[3%] flex justify-center items-center pointer-events-none select-none z-0">
         <motion.span
           ref={nameRef}
           initial={{ opacity: 1, y: '30vh', scale: 0.42 }}
           animate={isPreloaderFinished ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
           className="font-display font-black leading-none tracking-[-0.02em] text-[#EEFF04] uppercase text-center drop-shadow-sm [-webkit-text-stroke:1px_rgba(28,27,25,0.18)] inline-block"
-          style={{ fontSize: 'clamp(2.8rem, 12vw, 12rem)', whiteSpace: 'nowrap' }}
+          style={{ fontSize: 'clamp(2.8rem, 12.2vw, 24rem)', whiteSpace: 'nowrap' }}
         >
           PRAVEEN
         </motion.span>
       </div>
 
       {/* 3. HERO CENTER AREA: PORTRAIT + FLOATING GLASS BADGES */}
-      <div className="relative w-full max-w-[1440px] mx-auto flex-1 flex flex-col items-center justify-end z-10 pb-2 sm:pb-4">
+      <div className="relative w-full max-w-[1680px] 2xl:max-w-[1920px] mx-auto flex-1 flex flex-col items-center justify-end z-10 pb-2 sm:pb-4">
         {/* LEFT FLOATING BADGES (Desktop only — hidden on mobile to avoid covering the creator portrait) */}
-        <div className="hidden md:flex absolute left-4 lg:left-8 xl:left-14 top-1/2 -translate-y-1/2 flex-col gap-6 sm:gap-7 z-20 pointer-events-auto">
+        <div className="hidden md:flex absolute left-4 lg:left-8 xl:left-12 2xl:left-16 top-1/2 -translate-y-1/2 flex-col gap-5 lg:gap-6 z-20 pointer-events-auto">
           {/* Badge 1: 80+ Projects */}
           <motion.div
             initial={{ opacity: 0, x: -60, scale: 0.92 }}
@@ -256,23 +256,22 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* CENTER CREATOR PORTRAIT — Rises smoothly from down below */}
-        <div className="absolute inset-x-0 bottom-[175px] sm:bottom-[-90px] md:bottom-[-130px] flex justify-center pointer-events-none z-10">
+        {/* CENTER CREATOR PORTRAIT — Rises smoothly from down below, dynamically scales with viewport */}
+        <div className="absolute inset-x-0 bottom-[175px] sm:bottom-[-20px] md:bottom-[-25px] lg:bottom-[-30px] xl:bottom-[-35px] flex justify-center pointer-events-none z-10">
           <motion.div
             initial={{ opacity: 0, y: 80, scale: 0.94 }}
             animate={isPreloaderFinished ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 1.4, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <div
-              className="relative w-[305px] xs:w-[335px] sm:w-[360px] md:w-[440px] lg:w-[520px]"
-              style={{ aspectRatio: '3/4' }}
+              className="relative w-[305px] xs:w-[335px] sm:w-auto sm:h-[65vh] md:h-[70vh] lg:h-[74vh] xl:h-[76vh] 2xl:h-[78vh] sm:max-h-[1600px] max-w-[88vw] aspect-[3/4]"
             >
               <Image
                 src="/Smiling_Creator_with_Headphones-removebg-preview.png"
                 alt="Rai Praveen — Creative Video Editor & Motion Designer"
                 fill
                 priority
-                sizes="(max-width: 640px) 340px, (max-width: 1200px) 440px, 520px"
+                sizes="(max-width: 640px) 340px, (max-width: 1024px) 500px, (max-width: 1600px) 700px, 900px"
                 className="object-contain object-bottom drop-shadow-2xl"
               />
             </div>
@@ -339,7 +338,7 @@ export function Hero() {
         </div>
 
         {/* RIGHT FLOATING PILL/CARD (Desktop only — hidden on mobile to avoid covering portrait) */}
-        <div className="hidden md:flex absolute right-4 lg:right-8 xl:right-14 top-1/2 -translate-y-1/2 z-20 pointer-events-auto">
+        <div className="hidden md:flex absolute right-4 lg:right-8 xl:right-12 2xl:right-16 top-1/2 -translate-y-1/2 z-20 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, x: 60, scale: 0.92 }}
             animate={isPreloaderFinished ? { opacity: 1, x: 0, scale: 1 } : {}}
@@ -396,7 +395,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={isPreloaderFinished ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center sm:items-end justify-center sm:justify-between gap-1 sm:gap-4 pt-1 z-20 pb-0.5 sm:pb-0"
+        className="w-full max-w-[1680px] 2xl:max-w-[1920px] mx-auto flex flex-col sm:flex-row items-center sm:items-end justify-center sm:justify-between gap-1 sm:gap-4 pt-1 z-20 pb-0.5 sm:pb-0"
       >
         {/* Bottom Left Note */}
         <div className="text-center sm:text-left max-w-xs">
