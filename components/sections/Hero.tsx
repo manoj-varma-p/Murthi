@@ -169,7 +169,7 @@ export function Hero() {
           {/* Center Stage: Floating Cards + Portrait + Headline/Buttons */}
           <div className="relative w-full flex-1 flex flex-col items-center justify-end z-10 pb-3">
             {/* Left Floating Badges */}
-            <div className="absolute left-[45px] top-[390px] flex flex-col gap-6 z-20 pointer-events-auto">
+            <div className="absolute left-[45px] top-[402px] flex flex-col gap-6 z-20 pointer-events-auto">
               {/* Badge 1: 80+ Projects */}
               <motion.div
                 initial={{ opacity: 0, x: -60, scale: 0.92 }}
@@ -209,7 +209,7 @@ export function Hero() {
             </div>
 
             {/* Center Creator Portrait */}
-            <div className="absolute inset-x-0 bottom-[-85px] flex justify-center pointer-events-none z-10">
+            <div className="absolute inset-x-0 bottom-[-112px] flex justify-center pointer-events-none z-10">
               <motion.div
                 initial={{ opacity: 0, y: 80, scale: 0.94 }}
                 animate={isPreloaderFinished ? { opacity: 1, y: 0, scale: 1 } : {}}
@@ -229,7 +229,7 @@ export function Hero() {
             </div>
 
             {/* Headline & Buttons */}
-            <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-lg mb-1">
+            <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-lg mb-0">
               <motion.h2
                 initial={{ opacity: 0, y: 35 }}
                 animate={isPreloaderFinished ? { opacity: 1, y: 0 } : {}}
@@ -269,7 +269,7 @@ export function Hero() {
             </div>
 
             {/* Right Floating Card */}
-            <div className="absolute right-[45px] top-[375px] z-20 pointer-events-auto">
+            <div className="absolute right-[45px] top-[388px] z-20 pointer-events-auto">
               <motion.div
                 initial={{ opacity: 0, x: 60, scale: 0.92 }}
                 animate={isPreloaderFinished ? { opacity: 1, x: 0, scale: 1 } : {}}
