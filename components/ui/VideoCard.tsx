@@ -42,12 +42,12 @@ export function VideoCard({ video, index, onSelect, className }: VideoCardProps)
 
   return (
     <motion.div
-      layoutId={`video-card-${video.id}`}
       data-cursor="video"
       onClick={() => onSelect(video, index)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      whileHover={{ y: -10 }}
+      whileHover={{ y: -8, scale: 1.01 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         'group relative flex-shrink-0 w-[230px] sm:w-[280px] md:w-[320px] aspect-[9/16] rounded-none overflow-hidden bg-black/60 border border-white/15 shadow-2xl cursor-pointer select-none transition-all duration-300 hover:border-white/40 hover:shadow-2xl',

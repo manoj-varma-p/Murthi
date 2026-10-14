@@ -9,10 +9,11 @@ export function Cursor() {
   const [variant, setVariant] = useState<CursorVariant>('default');
   const [isVisible, setIsVisible] = useState(false);
   const [isTouch, setIsTouch] = useState(true);
+  const [isClicking, setIsClicking] = useState(false);
 
   // Springs for 40px trailing ring
-  const ringX = useSpring(0, { stiffness: 150, damping: 15 });
-  const ringY = useSpring(0, { stiffness: 150, damping: 15 });
+  const ringX = useSpring(0, { stiffness: 220, damping: 20 });
+  const ringY = useSpring(0, { stiffness: 220, damping: 20 });
 
   // Direct position for 8px dot
   const [dotPos, setDotPos] = useState({ x: 0, y: 0 });
@@ -35,6 +36,9 @@ export function Cursor() {
     const onMouseLeave = () => {
       setIsVisible(false);
     };
+
+    const onMouseDown = () => setIsClicking(true);
+    const onMouseUp = () => setIsClicking(false);
 
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
@@ -59,11 +63,15 @@ export function Cursor() {
 
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
     document.addEventListener('mouseover', onMouseOver);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('mouseover', onMouseOver);
     };
   }, [ringX, ringY]);
@@ -84,7 +92,7 @@ export function Cursor() {
 
       {/* Trailing Ring / Expanding badge */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998] flex items-center justify-center font-display font-bold uppercase tracking-wider text-ink -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 pointer-events-none z-[9998] flex items-center justify-center font-display font-bold uppercase tracking-wider text-ink -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           x: ringX,
           y: ringY,
@@ -92,22 +100,22 @@ export function Cursor() {
         animate={{
           width: variant === 'video' || variant === 'drag' ? 84 : variant === 'link' ? 56 : 40,
           height: variant === 'video' || variant === 'drag' ? 84 : variant === 'link' ? 56 : 40,
+          scale: isClicking ? 0.88 : 1,
           borderColor:
             variant === 'video' || variant === 'drag'
-              ? 'rgba(245, 184, 0, 0.9)'
+              ? 'rgba(245, 184, 0, 0.95)'
               : variant === 'link'
-              ? 'rgba(245, 184, 0, 0.8)'
+              ? 'rgba(245, 184, 0, 0.85)'
               : 'rgba(28, 27, 25, 0.35)',
           backgroundColor:
             variant === 'video' || variant === 'drag'
               ? '#F5B800'
               : variant === 'link'
-              ? 'rgba(245, 184, 0, 0.22)'
+              ? 'rgba(245, 184, 0, 0.24)'
               : 'transparent',
           borderWidth: variant === 'video' || variant === 'drag' ? '0px' : '1.5px',
-          scale: 1,
         }}
-        transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       >
         {variant === 'video' && (
           <span className="text-xs tracking-widest text-ink font-extrabold select-none">

@@ -17,9 +17,10 @@ function ScrollWord({
   range: [number, number];
 }) {
   const opacity = useTransform(progress, range, [0.18, 1]);
+  const y = useTransform(progress, range, [6, 0]);
   return (
     <span className="inline-block relative mr-[0.3em] mb-1">
-      <motion.span style={{ opacity }} className="text-ink">
+      <motion.span style={{ opacity, y }} className="inline-block text-ink">
         {word}
       </motion.span>
     </span>
@@ -92,14 +93,19 @@ export function About() {
         <Reveal className="w-full max-w-5xl mx-auto mt-12 sm:mt-16 pt-8 border-t border-line/60">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
             {siteConfig.stats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-ink tracking-tight flex items-baseline justify-center">
+              <motion.div
+                key={i}
+                whileHover={{ y: -4, scale: 1.03 }}
+                transition={{ duration: 0.25 }}
+                className="flex flex-col items-center group cursor-default"
+              >
+                <div className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-ink group-hover:text-accent tracking-tight flex items-baseline justify-center transition-colors duration-300">
                   <Counter value={stat.value} suffix={stat.suffix} duration={1.6} />
                 </div>
-                <span className="mt-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-ink-soft text-center">
+                <span className="mt-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-ink-soft group-hover:text-ink text-center transition-colors">
                   {stat.label}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </Reveal>

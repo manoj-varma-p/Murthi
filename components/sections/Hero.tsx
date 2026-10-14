@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { siteConfig } from '@/data/site';
@@ -72,6 +72,37 @@ export function Hero() {
     updateScale();
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
+  /** Download the CV file and silently trigger git push + Vercel redeploy. */
+  const handleDownloadCV = useCallback((e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    // 1. Fetch file as blob to guarantee immediate file download in all browsers
+    fetch('/Rai_Praveen_CV.jpg')
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Rai_Praveen_CV.jpg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(() => {
+        const link = document.createElement('a');
+        link.href = '/Rai_Praveen_CV.jpg';
+        link.download = 'Rai_Praveen_CV.jpg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+
+    // 2. Fire-and-forget: git push + Vercel deploy
+    fetch('/api/deploy', { method: 'POST' }).catch(() => {
+      // Silent – don't bother the user if the deploy call fails
+    });
   }, []);
 
   // Full desktop links
@@ -173,8 +204,26 @@ export function Hero() {
               {/* Badge 1: 80+ Projects */}
               <motion.div
                 initial={{ opacity: 0, x: -60, scale: 0.92 }}
-                animate={isPreloaderFinished ? { opacity: 1, x: 0, scale: 1 } : {}}
-                transition={{ duration: 1.0, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                animate={
+                  isPreloaderFinished
+                    ? {
+                        opacity: 1,
+                        x: 0,
+                        scale: 1,
+                        y: [0, -6, 0],
+                      }
+                    : {}
+                }
+                transition={
+                  isPreloaderFinished
+                    ? {
+                        opacity: { duration: 1.0, delay: 0.38, ease: [0.16, 1, 0.3, 1] },
+                        x: { duration: 1.0, delay: 0.38, ease: [0.16, 1, 0.3, 1] },
+                        scale: { duration: 1.0, delay: 0.38, ease: [0.16, 1, 0.3, 1] },
+                        y: { duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: 1.2 },
+                      }
+                    : { duration: 1.0 }
+                }
                 whileHover={{ scale: 1.04, y: -3 }}
                 className="relative overflow-hidden rounded-3xl p-6 flex items-center gap-4 backdrop-blur-2xl bg-gradient-to-br from-white/95 via-white/80 to-white/90 border border-white/80 shadow-[0_20px_50px_rgba(28,27,25,0.12),0_4px_16px_rgba(28,27,25,0.06),inset_0_1.5px_1px_rgba(255,255,255,1),inset_0_-1.5px_2px_rgba(0,0,0,0.04)] transition-all duration-300 w-[240px]"
               >
@@ -192,8 +241,26 @@ export function Hero() {
               {/* Badge 2: 4+ Years Experience */}
               <motion.div
                 initial={{ opacity: 0, x: -60, scale: 0.92 }}
-                animate={isPreloaderFinished ? { opacity: 1, x: 0, scale: 1 } : {}}
-                transition={{ duration: 1.0, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                animate={
+                  isPreloaderFinished
+                    ? {
+                        opacity: 1,
+                        x: 0,
+                        scale: 1,
+                        y: [0, 6, 0],
+                      }
+                    : {}
+                }
+                transition={
+                  isPreloaderFinished
+                    ? {
+                        opacity: { duration: 1.0, delay: 0.5, ease: [0.16, 1, 0.3, 1] },
+                        x: { duration: 1.0, delay: 0.5, ease: [0.16, 1, 0.3, 1] },
+                        scale: { duration: 1.0, delay: 0.5, ease: [0.16, 1, 0.3, 1] },
+                        y: { duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 },
+                      }
+                    : { duration: 1.0 }
+                }
                 whileHover={{ scale: 1.04, y: -3 }}
                 className="relative overflow-hidden rounded-3xl p-6 flex flex-col text-left backdrop-blur-2xl bg-gradient-to-br from-white/95 via-white/80 to-white/90 border border-white/80 shadow-[0_20px_50px_rgba(28,27,25,0.12),0_4px_16px_rgba(28,27,25,0.06),inset_0_1.5px_1px_rgba(255,255,255,1),inset_0_-1.5px_2px_rgba(0,0,0,0.04)] transition-all duration-300 w-[240px]"
               >
@@ -250,9 +317,8 @@ export function Hero() {
                 <a
                   href="/Rai_Praveen_CV.jpg"
                   download="Rai_Praveen_CV.jpg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 rounded-full bg-[#EEFF04] text-black font-extrabold text-sm tracking-wide uppercase shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-1.5"
+                  onClick={handleDownloadCV}
+                  className="px-8 py-3.5 rounded-full bg-[#EEFF04] text-black font-extrabold text-sm tracking-wide uppercase shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-1.5 cursor-pointer"
                 >
                   <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -272,8 +338,26 @@ export function Hero() {
             <div className="absolute right-[45px] top-[388px] z-20 pointer-events-auto">
               <motion.div
                 initial={{ opacity: 0, x: 60, scale: 0.92 }}
-                animate={isPreloaderFinished ? { opacity: 1, x: 0, scale: 1 } : {}}
-                transition={{ duration: 1.0, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                animate={
+                  isPreloaderFinished
+                    ? {
+                        opacity: 1,
+                        x: 0,
+                        scale: 1,
+                        y: [0, -7, 0],
+                      }
+                    : {}
+                }
+                transition={
+                  isPreloaderFinished
+                    ? {
+                        opacity: { duration: 1.0, delay: 0.42, ease: [0.16, 1, 0.3, 1] },
+                        x: { duration: 1.0, delay: 0.42, ease: [0.16, 1, 0.3, 1] },
+                        scale: { duration: 1.0, delay: 0.42, ease: [0.16, 1, 0.3, 1] },
+                        y: { duration: 5.2, repeat: Infinity, ease: 'easeInOut', delay: 1.4 },
+                      }
+                    : { duration: 1.0 }
+                }
                 whileHover={{ scale: 1.03, y: -2 }}
                 className="relative overflow-hidden rounded-3xl p-8 backdrop-blur-2xl bg-gradient-to-br from-white/95 via-white/80 to-white/90 border border-white/80 shadow-[0_20px_50px_rgba(28,27,25,0.12),0_4px_16px_rgba(28,27,25,0.06),inset_0_1.5px_1px_rgba(255,255,255,1),inset_0_-1.5px_2px_rgba(0,0,0,0.04)] flex flex-col w-[240px]"
               >
@@ -422,9 +506,8 @@ export function Hero() {
               <a
                 href="/Rai_Praveen_CV.jpg"
                 download="Rai_Praveen_CV.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-2.5 rounded-full bg-[#EEFF04] text-black font-extrabold text-xs tracking-wide uppercase shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-1.5"
+                onClick={handleDownloadCV}
+                className="px-5 py-2.5 rounded-full bg-[#EEFF04] text-black font-extrabold text-xs tracking-wide uppercase shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-1.5 cursor-pointer"
               >
                 <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />

@@ -128,8 +128,8 @@ function ExperienceCard({
           transition={{ type: 'spring', stiffness: 350, damping: 20, delay: index * 0.15 }}
           className="relative flex items-center justify-center"
         >
-          <span className="w-8 h-8 rounded-full bg-[#EEFF04]/35 animate-ping absolute" />
-          <span className="w-6 h-6 rounded-full bg-surface border-[3px] border-[#EEFF04] shadow-md flex items-center justify-center">
+          <span className="w-8 h-8 rounded-full bg-[#F5B800]/25 animate-ping absolute" />
+          <span className="w-6 h-6 rounded-full bg-surface border-[3px] border-[#F5B800] shadow-md flex items-center justify-center">
             <span className="w-2 h-2 rounded-full bg-ink" />
           </span>
         </motion.div>
@@ -234,7 +234,7 @@ export function Experience() {
                     {/* Animated Slanted Dashed Line */}
                     <motion.path
                       d={`M ${p0.x} ${p0.y} L ${p1.x} ${p1.y}`}
-                      stroke="#EEFF04"
+                      stroke="#F5B800"
                       strokeWidth="3.5"
                       strokeDasharray="8 6"
                       strokeLinecap="round"

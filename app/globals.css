@@ -117,28 +117,79 @@ html.lenis body {
 
 /* ── Dual Automatic Video Stream Keyframes ───────────────────────────── */
 @keyframes videoScrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes videoScrollRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 .animate-video-left {
   display: flex;
   width: max-content;
   animation: videoScrollLeft 48s linear infinite;
+  will-change: transform;
 }
 
 .animate-video-right {
   display: flex;
   width: max-content;
   animation: videoScrollRight 48s linear infinite;
+  will-change: transform;
+}
+
+.animate-ticker-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 26s linear infinite;
+  will-change: transform;
+}
+
+.animate-tools-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 18s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 30s linear infinite;
+  will-change: transform;
 }
 
 .pause-on-hover:hover {
   animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-video-left,
+  .animate-video-right,
+  .animate-ticker-left,
+  .animate-tools-left,
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+  }
 }
 

@@ -18,6 +18,20 @@ export type VideoCategory = (typeof videoCategories)[number];
 
 export const videos: VideoItem[] = [
   {
+    id: "Fv069KkKKwY",
+    title: "Treqo Brand Story Reel",
+    category: "Reel",
+    description: "Engaging talking-head brand reel with sleek kinetic captions, studio sound design, and color grade.",
+    tools: ["Premiere Pro", "After Effects"],
+  },
+  {
+    id: "5Ms_nSma2xc",
+    title: "Treqo High-Retention Short",
+    category: "Reel",
+    description: "Punchy educational cut featuring 3D callouts, animated lower thirds, and dynamic visual pacing.",
+    tools: ["Premiere Pro", "After Effects"],
+  },
+  {
     id: "p6x1XIZtxc4",
     title: "Cinematic Real Estate Short",
     category: "Reel",

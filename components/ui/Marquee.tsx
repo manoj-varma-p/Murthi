@@ -16,13 +16,11 @@ interface MarqueeProps {
 export function Marquee({
   items,
   direction = 'left',
-  speed = 30,
   className,
   outlineText = true,
 }: MarqueeProps) {
-  const prefersReduced = useReducedMotion();
-  // Duplicate array 4 times for infinite seamless loop
-  const list = [...items, ...items, ...items, ...items];
+  // Duplicate array 2 times for mathematically seamless 50% translation
+  const list = [...items, ...items];
 
   return (
     <div
@@ -32,20 +30,11 @@ export function Marquee({
       )}
       data-cursor="drag"
     >
-      <motion.div
-        animate={
-          prefersReduced
-            ? {}
-            : {
-                x: direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'],
-              }
-        }
-        transition={{
-          repeat: Infinity,
-          ease: 'linear',
-          duration: speed,
-        }}
-        className="flex shrink-0 items-center gap-6 md:gap-10 group-hover:[animation-play-state:paused]"
+      <div
+        className={cn(
+          'flex shrink-0 items-center gap-6 md:gap-10 pause-on-hover will-change-transform',
+          direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'
+        )}
       >
         {list.map((item, index) => {
           const isBullet = item === '•';
@@ -65,7 +54,7 @@ export function Marquee({
             </div>
           );
         })}
-      </motion.div>
+      </div>
     </div>
   );
 }

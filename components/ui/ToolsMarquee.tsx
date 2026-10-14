@@ -314,8 +314,8 @@ function PureToolIcon({ id }: { id: string }) {
 
 export function ToolsMarquee({ speed = 12 }: { speed?: number }) {
   const prefersReduced = useReducedMotion();
-  // Duplicate list 3 times for seamless infinite loop
-  const repeatedList = [...toolsList, ...toolsList, ...toolsList];
+  // Duplicate list twice for seamless 50% infinite translation loop
+  const repeatedList = [...toolsList, ...toolsList];
 
   return (
     <div className="relative w-full overflow-hidden py-6 select-none group">
@@ -323,20 +323,8 @@ export function ToolsMarquee({ speed = 12 }: { speed?: number }) {
       <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-bg-light to-transparent z-10" />
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-l from-bg-light to-transparent z-10" />
 
-      <motion.div
-        animate={
-          prefersReduced
-            ? {}
-            : {
-                x: ['0%', '-33.333%'],
-              }
-        }
-        transition={{
-          repeat: Infinity,
-          ease: 'linear',
-          duration: speed, // Sped up from 24s to 12s per user request
-        }}
-        className="flex shrink-0 items-center gap-12 sm:gap-16 md:gap-20 group-hover:[animation-play-state:paused]"
+      <div
+        className="animate-tools-left pause-on-hover flex shrink-0 items-center gap-12 sm:gap-16 md:gap-20 will-change-transform"
       >
         {repeatedList.map((tool, idx) => (
           <div
@@ -347,7 +335,7 @@ export function ToolsMarquee({ speed = 12 }: { speed?: number }) {
             <PureToolIcon id={tool.id} />
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

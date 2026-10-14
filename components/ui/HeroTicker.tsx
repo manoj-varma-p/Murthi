@@ -23,35 +23,23 @@ const keywords = [
 
 export function HeroTicker() {
   const prefersReduced = useReducedMotion();
-  // Duplicate for seamless infinite loop
-  const repeated = [...keywords, ...keywords, ...keywords];
+  // Duplicate exactly twice for a mathematically seamless 50% loop
+  const repeated = [...keywords, ...keywords];
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-[#0E0E0E] text-white py-5 sm:py-6 border-y border-white/15 select-none z-20"
+      className="relative w-full overflow-hidden bg-[#0E0E0E] text-white py-5 sm:py-6 border-y border-white/15 select-none z-20 group"
       aria-label="Creative skills ticker"
     >
       {/* Subtle edge fades for smooth blending */}
       <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#0E0E0E] to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#0E0E0E] to-transparent z-10 pointer-events-none" />
 
-      <motion.div
-        animate={
-          prefersReduced
-            ? {}
-            : {
-                x: ['0%', '-50%'],
-              }
-        }
-        transition={{
-          repeat: Infinity,
-          ease: 'linear',
-          duration: 20,
-        }}
-        className="flex shrink-0 items-center gap-6 sm:gap-10 whitespace-nowrap will-change-transform hover:[animation-play-state:paused]"
+      <div
+        className="animate-ticker-left pause-on-hover flex shrink-0 items-center gap-6 sm:gap-10 whitespace-nowrap will-change-transform cursor-default"
       >
         {repeated.map((word, idx) => (
-          <div key={idx} className="flex items-center gap-6 sm:gap-10">
+          <div key={idx} className="flex items-center gap-6 sm:gap-10 shrink-0">
             <span className="font-display font-black text-lg sm:text-2xl md:text-3xl uppercase tracking-wider text-white hover:text-[#EEFF04] transition-colors duration-200">
               {word}
             </span>
@@ -64,7 +52,7 @@ export function HeroTicker() {
             </svg>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

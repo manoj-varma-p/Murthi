@@ -5,12 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollContext } from './SmoothScroll';
 
 export function Preloader() {
-  const { isPreloaderFinished, setPreloaderFinished } = useScrollContext();
+  const { isPreloaderFinished, setPreloaderFinished, stopScroll, startScroll } = useScrollContext();
   const [progress, setProgress] = useState(0);
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     if (isPreloaderFinished) return;
+
+    // Lock page scroll while preloading
+    stopScroll();
 
     let finished = false;
 
@@ -19,6 +22,7 @@ export function Preloader() {
       finished = true;
       setIsDone(true);
       setPreloaderFinished(true);
+      startScroll();
     };
 
     const startTime = performance.now();

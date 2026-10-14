@@ -82,7 +82,10 @@ export function VideoModal({
 
           {/* Centered 9:16 Video Player Container */}
           <motion.div
-            layoutId={`video-card-${video.id}`}
+            initial={{ scale: 0.92, opacity: 0, y: 16 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.94, opacity: 0, y: 12 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 320 }}
             className="relative w-full max-w-[340px] sm:max-w-[380px] md:max-w-[420px] aspect-[9/16] max-h-[85vh] rounded-none overflow-hidden bg-black shadow-2xl border border-white/20 flex flex-col"
           >
             {/* Top Bar inside modal */}
